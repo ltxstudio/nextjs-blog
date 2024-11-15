@@ -1,3 +1,5 @@
+"use client";
+
 import Share from "@components/Share";
 import dateFormat from "@lib/utils/dateFormat";
 import similerItems from "@lib/utils/similarItems";
