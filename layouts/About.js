@@ -8,23 +8,34 @@ const About = ({ data }) => {
   const { title, image, social } = frontmatter;
 
   return (
-    <section className="section">
-      <div className="container text-center">
+    <section className="section bg-gray-50 py-16">
+      <div className="container text-center px-4">
+        {/* Image Section */}
         {image && (
-          <div className="img-cover mb-8">
+          <div className="relative mb-8 max-w-full h-auto mx-auto">
             <Image
               src={image}
               width={920}
               height={515}
               alt={title}
-              className="rounded-lg"
+              className="rounded-lg object-cover shadow-lg"
             />
           </div>
         )}
-        {markdownify(title, "h1", "h2")}
-        <Social source={social} className="social-icons-simple my-8" />
 
-        <div className="content">
+        {/* Title Section */}
+        {markdownify(title, "h1", "text-3xl md:text-4xl font-semibold text-gray-800 mb-6")}
+
+        {/* Social Links Section */}
+        {social && (
+          <Social
+            source={social}
+            className="social-icons-simple my-6 flex justify-center gap-6"
+          />
+        )}
+
+        {/* Content Section */}
+        <div className="content text-lg text-gray-700 leading-relaxed mx-auto max-w-3xl px-4">
           <MDXContent content={content} />
         </div>
       </div>
