@@ -18,7 +18,7 @@ const PostSingle = ({ post, posts, authors, slug }) => {
   // Disqus configuration
   const disqusShortname = "nullbite"; // Replace with your Disqus shortname
   const disqusConfig = {
-    url: `https://yourwebsite.com/${slug}`, // Replace with your website URL
+    url: `https://yourwebsite.com/${post.slug}`, // Replace with your website URL
     identifier: slug, // Replace with the post identifier
     title: title, // Replace with the post title
   };
