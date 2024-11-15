@@ -115,7 +115,7 @@ const PostSingle = ({ post, posts, authors, slug }) => {
         </section>
       )}
       {/* Disqus comments section */}
-      < section className="section">
+      <section className="section">
         <div className="container mx-auto px-4 md:px-8">
           <h2 className="mb-8 text-center text-2xl font-bold">Comments</h2>
           <DiscussionEmbed
