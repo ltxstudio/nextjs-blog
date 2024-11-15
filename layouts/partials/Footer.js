@@ -8,22 +8,31 @@ import Link from "next/link";
 const Footer = () => {
   const { copyright } = config.params;
   return (
-    <footer className="section bg-theme-dark">
+    <footer className="section bg-theme-dark py-8">
       <div className="container text-center">
         {/* footer menu */}
-        <ul className="mb-8 space-x-4">
+        <ul className="mb-8 flex flex-wrap justify-center space-x-4">
           {menu.footer.map((menu) => (
             <li className="inline-block" key={menu.name}>
-              <Link href={menu.url} className="p-4 text-light hover:text-white">
+              <Link 
+                href={menu.url} 
+                className="p-4 text-light hover:text-white transition duration-300 ease-in-out transform hover:scale-105"
+              >
                 {menu.name}
               </Link>
             </li>
           ))}
         </ul>
         {/* social icons */}
-        <Social source={social} className="social-icons mb-8" />
+        <div className="mb-8">
+          <Social source={social} className="social-icons flex justify-center space-x-4" />
+        </div>
+        {/* divider */}
+        <div className="border-t border-light my-4" />
         {/* copyright */}
-        {markdownify(copyright, "p", "text-light")}
+        <div className="text-light">
+          {markdownify(copyright, "p", "text-light")}
+        </div>
       </div>
     </footer>
   );
