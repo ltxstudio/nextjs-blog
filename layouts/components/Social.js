@@ -93,7 +93,7 @@ const Social = ({ source, className }) => {
   ];
 
   return (
-    <ul className={`${className} flex flex-wrap space-x-4`}>
+    <ul className={`${className} flex flex-wrap justify-center gap-4 md:gap-6`}>
       {socialIcons.map(({ name, icon: Icon, color, link }, i) => (
         link ? (
           <li key={i} className="inline-block">
@@ -102,7 +102,7 @@ const Social = ({ source, className }) => {
               href={link}
               target="_blank"
               rel="noopener noreferrer nofollow"
-              className={`p-3 rounded-full text-xl ${color} hover:text-white hover:bg-gray-700 transition-colors`}
+              className={`p-4 rounded-full text-2xl ${color} hover:bg-gray-800 hover:text-white transition-all ease-in-out transform hover:scale-110`}
             >
               <Icon />
             </a>
