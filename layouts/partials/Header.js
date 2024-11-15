@@ -8,10 +8,8 @@ import React, { useEffect, useState } from "react";
 import { IoSearch } from "react-icons/io5";
 
 const Header = () => {
-  // destructuring the main menu from menu object
   const { main } = menu;
 
-  // states declaration
   const [navFixed, setNavFixed] = useState(false);
   const [searchModal, setSearchModal] = useState(false);
 
@@ -32,16 +30,17 @@ const Header = () => {
   return (
     <>
       <header
-        className={`sticky top-0 z-50 bg-white py-2 transition-all ${
-          navFixed ? "shadow-md bg-gray-100" : "pt-8 md:pt-16"
+        className={`sticky top-0 z-50 bg-white py-4 md:py-6 transition-all ${
+          navFixed ? "shadow-lg bg-gray-900 text-white" : "pt-8 md:pt-16"
         }`}
       >
-        <nav className="navbar container flex items-center justify-between">
-          {/* logo */}
+        <nav className="navbar container flex items-center justify-between mx-auto px-4">
+          {/* Logo */}
           <div className="order-0">
             <Logo />
           </div>
-          {/* navbar toggler */}
+
+          {/* Navbar Toggler */}
           <input id="nav-toggle" type="checkbox" className="hidden" />
           <label
             id="show-button"
@@ -66,28 +65,28 @@ const Header = () => {
               />
             </svg>
           </label>
-          {/* /navbar toggler */}
-
+          
+          {/* Navbar Menu */}
           <ul
             id="nav-menu"
-            className="navbar-nav order-3 hidden w-full md:order-1 md:flex md:w-auto md:space-x-4"
+            className="navbar-nav order-3 hidden w-full md:order-1 md:flex md:w-auto md:space-x-6 lg:space-x-8"
           >
             {main.map((menu, i) => (
               <React.Fragment key={`menu-${i}`}>
                 {menu.hasChildren ? (
                   <li className="nav-item nav-dropdown group relative">
-                    <span className="nav-link inline-flex items-center p-2 text-gray-700 hover:text-primary transition">
+                    <span className="nav-link inline-flex items-center p-3 text-gray-700 hover:text-primary transition">
                       {menu.name}
                       <svg className="h-4 w-4 fill-current ml-1" viewBox="0 0 20 20">
                         <path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z" />
                       </svg>
                     </span>
-                    <ul className="nav-dropdown-list hidden group-hover:block md:invisible md:absolute md:block md:opacity-0 md:group-hover:visible md:group-hover:opacity-100 transition-opacity duration-300">
+                    <ul className="nav-dropdown-list hidden group-hover:block absolute left-0 mt-2 w-48 bg-white shadow-md rounded-lg opacity-0 group-hover:opacity-100 transition-opacity duration-300">
                       {menu.children.map((child, i) => (
                         <li className="nav-dropdown-item" key={`children-${i}`}>
                           <Link
-                            href ={child.url}
-                            className="nav-dropdown-link block p-2 text-gray-600 hover:text-primary transition"
+                            href={child.url}
+                            className="nav-dropdown-link block p-3 text-gray-600 hover:text-primary transition"
                           >
                             {child.name}
                           </Link>
@@ -97,7 +96,7 @@ const Header = () => {
                   </li>
                 ) : (
                   <li className="nav-item">
-                    <Link href={menu.url} className="nav-link block p-2 text-gray-700 hover:text-primary transition">
+                    <Link href={menu.url} className="nav-link block p-3 text-gray-700 hover:text-primary transition">
                       {menu.name}
                     </Link>
                   </li>
@@ -105,23 +104,21 @@ const Header = () => {
               </React.Fragment>
             ))}
           </ul>
+
+          {/* Search Icon */}
           <div className="order-1 ml-auto md:order-2 md:ml-0">
             <div
-              className="cursor-pointer p-2 text-xl text-dark hover:text-primary transition-transform transform hover:scale-110"
-              onClick={() => {
-                setSearchModal(true);
-              }}
+              className="cursor-pointer p-3 text-xl text-dark hover:text-primary transition-transform transform hover:scale-110"
+              onClick={() => setSearchModal(true)}
             >
               <IoSearch />
             </div>
           </div>
-
-          <SearchModal
-            searchModal={searchModal}
-            setSearchModal={setSearchModal}
-          />
         </nav>
       </header>
+
+      {/* Search Modal */}
+      <SearchModal searchModal={searchModal} setSearchModal={setSearchModal} />
     </>
   );
 };
