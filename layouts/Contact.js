@@ -1,116 +1,69 @@
-import {
-  IoCall,
-  IoGlobeOutline,
-  IoLocation,
-  IoLogoBehance,
-  IoLogoBitbucket,
-  IoLogoCodepen,
-  IoLogoDribbble,
-  IoLogoFacebook,
-  IoLogoFoursquare,
-  IoLogoGithub,
-  IoLogoGitlab,
-  IoLogoInstagram,
-  IoLogoLinkedin,
-  IoLogoMedium,
-  IoLogoPinterest,
-  IoLogoReddit,
-  IoLogoRss,
-  IoLogoSkype,
-  IoLogoSnapchat,
-  IoLogoSoundcloud,
-  IoLogoTiktok,
-  IoLogoTumblr,
-  IoLogoTwitter,
-  IoLogoVimeo,
-  IoLogoVk,
-  IoLogoWhatsapp,
-  IoLogoYoutube,
-  IoMail,
-} from "react-icons/io5";
+import config from "@config/config";
+import { markdownify } from "@lib/utils/textConverter";
 
-const Social = ({ source, className }) => {
-  const {
-    facebook,
-    twitter,
-    instagram,
-    youtube,
-    linkedin,
-    github,
-    gitlab,
-    medium,
-    codepen,
-    bitbucket,
-    dribbble,
-    behance,
-    pinterest,
-    soundcloud,
-    tumblr,
-    reddit,
-    vk,
-    whatsapp,
-    snapchat,
-    vimeo,
-    tiktok,
-    foursquare,
-    rss,
-    email,
-    phone,
-    address,
-    skype,
-    website,
-  } = source;
-  
-  const socialIcons = [
-    { name: 'facebook', icon: IoLogoFacebook, color: 'text-blue-600', link: facebook },
-    { name: 'twitter', icon: IoLogoTwitter, color: 'text-blue-400', link: twitter },
-    { name: 'instagram', icon: IoLogoInstagram, color: 'text-pink-600', link: instagram },
-    { name: 'youtube', icon: IoLogoYoutube, color: 'text-red-600', link: youtube },
-    { name: 'linkedin', icon: IoLogoLinkedin, color: 'text-blue-700', link: linkedin },
-    { name: 'github', icon: IoLogoGithub, color: 'text-gray-800', link: github },
-    { name: 'gitlab', icon: IoLogoGitlab, color: 'text-orange-500', link: gitlab },
-    { name: 'medium', icon: IoLogoMedium, color: 'text-green-500', link: medium },
-    { name: 'codepen', icon: IoLogoCodepen, color: 'text-yellow-500', link: codepen },
-    { name: 'bitbucket', icon: IoLogoBitbucket, color: 'text-blue-500', link: bitbucket },
-    { name: 'dribbble', icon: IoLogoDribbble, color: 'text-pink-500', link: dribbble },
-    { name: 'behance', icon: IoLogoBehance, color: 'text-blue-500', link: behance },
-    { name: 'pinterest', icon: IoLogoPinterest, color: 'text-red-500', link: pinterest },
-    { name: 'soundcloud', icon: IoLogoSoundcloud, color: 'text-orange-500', link: soundcloud },
-    { name: 'tumblr', icon: IoLogoTumblr, color: 'text-purple-600', link: tumblr },
-    { name: 'reddit', icon: IoLogoReddit, color: 'text-orange-600', link: reddit },
-    { name: 'vk', icon: IoLogoVk, color: 'text-blue-500', link: vk },
-    { name: 'whatsapp', icon: IoLogoWhatsapp, color: 'text-green-600', link: whatsapp },
-    { name: 'snapchat', icon: IoLogoSnapchat, color: 'text-yellow-400', link: snapchat },
-    { name: 'vimeo', icon: IoLogoVimeo, color: 'text-green-500', link: vimeo },
-    { name: 'tiktok', icon: IoLogoTiktok, color: 'text-black', link: tiktok },
-    { name: 'foursquare', icon: IoLogoFoursquare, color: 'text-blue-500', link: foursquare },
-    { name: 'skype', icon: IoLogoSkype, color: 'text-blue-600', link: skype },
-    { name: 'website', icon: IoGlobeOutline, color: 'text-gray-500', link: website },
-    { name: 'rss', icon: IoLogoRss, color: 'text-yellow-500', link: rss },
-    { name: 'email', icon: IoMail, color: 'text-gray-600', link: email },
-    { name: 'phone', icon: IoCall, color: 'text-green-500', link: phone },
-    { name: 'address', icon: IoLocation, color: 'text-red-500', link: address },
-  ];
+const Contact = ({ data }) => {
+  const { frontmatter } = data;
+  const { title } = frontmatter;
+  const { contact_form_action } = config.params;
 
   return (
-    <ul className={`${className} flex flex-wrap justify-center gap-4 md:gap-6`}>
-      {socialIcons.map(({ name, icon: Icon, color, link }, i) => (
-        link ? (
-          <li key={i} className="inline-block">
-            <a
-              aria-label={name}
-              href={link}
-              target="_blank"
-              rel="noopener noreferrer nofollow"
-              className={`p-4 rounded-full text-2xl ${color} hover:bg-gray-800 hover:text-white transition-all ease-in-out transform hover:scale-110`}
-            >
-              <Icon />
-            </a>
-          </li>
-        ) : null
-      ))}
-    </ul>
+    <section className="section py-12 bg-gray-50">
+      <div className="container max-w-[900px] mx-auto px-4">
+        {markdownify(title, "h1", "text-3xl md:text-4xl font-semibold mb-8 text-center")}
+        <form
+          className="contact-form space-y-8 bg-white p-6 rounded-lg shadow-lg"
+          method="POST"
+          action={contact_form_action}
+        >
+          <div className="mb-6">
+            <label className="text-lg font-medium text-gray-700 mb-2 block" htmlFor="name">
+              Name
+            </label>
+            <input
+              className="form-input w-full p-3 border-2 border-gray-300 rounded-md focus:outline-none focus:border-primary-500 transition"
+              name="name"
+              type="text"
+              required
+            />
+          </div>
+          <div className="mb-6">
+            <label className="text-lg font-medium text-gray-700 mb-2 block" htmlFor="email">
+              Email
+            </label>
+            <input
+              className="form-input w-full p-3 border-2 border-gray-300 rounded-md focus:outline-none focus:border-primary-500 transition"
+              name="email"
+              type="email"
+              required
+            />
+          </div>
+          <div className="mb-6">
+            <label className="text-lg font-medium text-gray-700 mb-2 block" htmlFor="subject">
+              Subject
+            </label>
+            <input
+              className="form-input w-full p-3 border-2 border-gray-300 rounded-md focus:outline-none focus:border-primary-500 transition"
+              name="subject"
+              type="text"
+              required
+            />
+          </div>
+          <div className="mb-6">
+            <label className="text-lg font-medium text-gray-700 mb-2 block" htmlFor="message">
+              Message
+            </label>
+            <textarea
+              className="form-textarea w-full p-3 border-2 border-gray-300 rounded-md focus:outline-none focus:border-primary-500 transition"
+              rows="7"
+            />
+          </div>
+          <button className="btn btn-outline-primary py-3 px-6 rounded-md font-medium w-full md:w-auto transition duration-300">
+            Submit Now
+          </button>
+        </form>
+      </div>
+    </section>
   );
 };
 
-export default Social;
+export default Contact;
