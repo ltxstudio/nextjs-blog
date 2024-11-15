@@ -6,7 +6,6 @@ import SimilarPosts from "@partials/SimilarPosts";
 import Image from "next/image";
 import Link from "next/link";
 import MDXContent from "./partials/MDXContent";
-import { DiscussionEmbed } from "disqus-react"; // Import Disqus component
 
 const PostSingle = ({ post, posts, authors, slug }) => {
   const { frontmatter, content } = post;
@@ -14,18 +13,10 @@ const PostSingle = ({ post, posts, authors, slug }) => {
   description = description ? description : content.slice(0, 120);
   const similarPosts = similerItems(post, posts, slug);
 
-  // Disqus configuration
-  const disqusShortname = "your-disqus-shortname"; // Replace with your Disqus shortname
-  const disqusConfig = {
-    url: `https://yourwebsite.com/${slug}`, // Replace with your website URL
-    identifier: slug, // Replace with the post identifier
-    title: title, // Replace with the post title
-  };
-
   return (
     <>
       <section className="section">
-        <div className="container mx-auto px-4 md:px-8">
+        <div className="container">
           <article className="text-center">
             {markdownify(title, "h1", "h2")}
             <ul className="mb-8 mt-4 flex flex-wrap items-center justify-center space-x-3 text-text">
@@ -40,7 +31,7 @@ const PostSingle = ({ post, posts, authors, slug }) => {
                     <Link
                       href={`/authors/${slugify(author.frontmatter.title)}`}
                       key={`author-${i}`}
-                      className="flex items-center hover:text-primary transition duration-300"
+                      className="flex items-center hover:text-primary"
                     >
                       {author.frontmatter.image && (
                         <Image
@@ -55,14 +46,14 @@ const PostSingle = ({ post, posts, authors, slug }) => {
                     </Link>
                   ))}
               </li>
-              <li className="text-gray-600">{dateFormat(date)}</li>
+              <li>{dateFormat(date)}</li>
               <li>
-                <ul className="flex flex-wrap">
+                <ul>
                   {categories.map((category, i) => (
                     <li className="inline-block" key={`category-${i}`}>
                       <Link
                         href={`/categories/${slugify(category)}`}
-                        className="mr-3 hover:text-primary transition duration-300"
+                        className="mr-3 hover:text-primary"
                       >
                         &#9635; {humanize(category)}
                       </Link>
@@ -77,19 +68,19 @@ const PostSingle = ({ post, posts, authors, slug }) => {
                 height={500}
                 width={1000}
                 alt={title}
-                className="rounded-lg shadow-lg mb-8"
+                className="rounded-lg"
               />
             )}
             <div className="content mb-16 text-left">
               <MDXContent content={content} />
             </div>
             <div className="flex flex-wrap items-center justify-between">
-              <ul className="mb-4 mr-4 flex flex-wrap space-x-3">
+              <ul className="mb-4 mr-4 space-x-3">
                 {tags.map((tag, i) => (
                   <li className="inline-block" key={`tag-${i}`}>
                     <Link
                       href={`/tags/${slugify(tag)}`}
-                      className="block rounded-lg bg-theme-light px-4 py-2 font-semibold text-dark hover:bg-primary hover:text-white transition duration-300"
+                      className="block rounded-lg bg-theme-light px-4 py-2 font-semibold text-dark hover:text-primary"
                     >
                       #{humanize(tag)}
                     </Link>
@@ -108,22 +99,12 @@ const PostSingle = ({ post, posts, authors, slug }) => {
       </section>
       {similarPosts && similarPosts.length > 0 && (
         <section className="section">
-          <div className="container mx-auto px-4 md:px-8">
-            <h2 className="mb-8 text-center text-2xl font-bold">Similar Posts</h2>
+          <div className="container">
+            <h2 className="mb-8 text-center">Similar Posts</h2>
             <SimilarPosts posts={similarPosts.slice(0, 3)} />
           </div>
         </section>
       )}
-      {/* Disqus comments section */}
-      <section className="section">
-        <div className="container mx-auto px-4 md:px-8">
-          <h2 className="mb-8 text-center text-2xl font-bold">Comments</h2>
-          <DiscussionEmbed
-            shortname={disqusShortname}
-            config={disqusConfig}
-          />
-        </div>
-      </section>
     </>
   );
 };
