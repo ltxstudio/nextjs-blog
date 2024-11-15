@@ -6,12 +6,28 @@
         "body": "#fff",
         "border": "#D5D5D5",
         "theme_light": "#FAFAFA",
-        "theme_dark": "#152035"
+        "theme_dark": "#152035",
+        "accent": "#FF6F61",
+        "highlight": "#F4A300",
+        "secondary": "#4F4F4F"
       },
       "text_color": {
         "default": "#747577",
         "dark": "#152035",
-        "light": "#a1a5ae"
+        "light": "#a1a5ae",
+        "muted": "#B0B0B0",
+        "contrast": "#FFFFFF"
+      },
+      "states": {
+        "error": "#F44336",
+        "warning": "#FF9800",
+        "success": "#4CAF50",
+        "info": "#2196F3"
+      },
+      "background": {
+        "light": "#FAFAFA",
+        "dark": "#212121",
+        "overlay": "rgba(0, 0, 0, 0.5)"
       }
     }
   },
