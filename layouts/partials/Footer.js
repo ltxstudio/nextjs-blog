@@ -8,29 +8,32 @@ import Link from "next/link";
 const Footer = () => {
   const { copyright } = config.params;
   return (
-    <footer className="section bg-theme-dark py-8">
-      <div className="container text-center">
-        {/* footer menu */}
-        <ul className="mb-8 flex flex-wrap justify-center space-x-4">
-          {menu.footer.map((menu) => (
-            <li className="inline-block" key={menu.name}>
+    <footer className="section bg-theme-dark py-12 lg:py-16 text-light">
+      <div className="container mx-auto px-4 md:px-8">
+        {/* Footer Menu */}
+        <ul className="mb-8 flex flex-wrap justify-center space-x-6 md:space-x-12">
+          {menu.footer.map((item) => (
+            <li className="inline-block" key={item.name}>
               <Link 
-                href={menu.url} 
-                className="p-4 text-light hover:text-white transition duration-300 ease-in-out transform hover:scale-105"
+                href={item.url} 
+                className="text-lg font-medium py-2 px-4 text-light hover:text-primary transition duration-300 ease-in-out transform hover:scale-105"
               >
-                {menu.name}
+                {item.name}
               </Link>
             </li>
           ))}
         </ul>
-        {/* social icons */}
-        <div className="mb-8">
-          <Social source={social} className="social-icons flex justify-center space-x-4" />
+
+        {/* Social Icons */}
+        <div className="mb-8 flex justify-center space-x-6">
+          <Social source={social} className="social-icons flex space-x-6 text-light" />
         </div>
-        {/* divider */}
-        <div className="border-t border-light my-4" />
-        {/* copyright */}
-        <div className="text-light">
+
+        {/* Divider */}
+        <div className="border-t border-light opacity-20 my-6 md:my-8" />
+
+        {/* Copyright */}
+        <div className="text-sm md:text-base text-center text-light opacity-80">
           {markdownify(copyright, "p", "text-light")}
         </div>
       </div>
