@@ -7,6 +7,7 @@ import Link from "next/link";
 
 const Footer = () => {
   const { copyright } = config.params;
+
   return (
     <footer className="section bg-theme-dark py-12 lg:py-16 text-light">
       <div className="container mx-auto px-4 md:px-8">
@@ -16,7 +17,7 @@ const Footer = () => {
             <li className="inline-block" key={item.name}>
               <Link 
                 href={item.url} 
-                className="text-lg font-medium py-2 px-4 text-light hover:text-primary transition duration-300 ease-in-out transform hover:scale-105"
+                className="text-lg font-medium py-2 px-4 text-light hover:text-primary hover:bg-theme-light rounded-md transition duration-300 ease-in-out transform hover:scale-105"
               >
                 {item.name}
               </Link>
@@ -35,6 +36,15 @@ const Footer = () => {
         {/* Copyright */}
         <div className="text-sm md:text-base text-center text-light opacity-80">
           {markdownify(copyright, "p", "text-light")}
+        </div>
+      </div>
+
+      {/* Additional Footer Background Section */}
+      <div className="bg-theme-dark-2 py-8">
+        <div className="container mx-auto px-4 text-center text-light">
+          <p className="text-sm md:text-base opacity-70">
+            Designed and developed by YourCompanyName. All rights reserved.
+          </p>
         </div>
       </div>
     </footer>
