@@ -60,334 +60,55 @@ const Social = ({ source, className }) => {
     skype,
     website,
   } = source;
+  
+  const socialIcons = [
+    { name: 'facebook', icon: IoLogoFacebook, color: 'text-blue-600', link: facebook },
+    { name: 'twitter', icon: IoLogoTwitter, color: 'text-blue-400', link: twitter },
+    { name: 'instagram', icon: IoLogoInstagram, color: 'text-pink-600', link: instagram },
+    { name: 'youtube', icon: IoLogoYoutube, color: 'text-red-600', link: youtube },
+    { name: 'linkedin', icon: IoLogoLinkedin, color: 'text-blue-700', link: linkedin },
+    { name: 'github', icon: IoLogoGithub, color: 'text-gray-800', link: github },
+    { name: 'gitlab', icon: IoLogoGitlab, color: 'text-orange-500', link: gitlab },
+    { name: 'medium', icon: IoLogoMedium, color: 'text-green-500', link: medium },
+    { name: 'codepen', icon: IoLogoCodepen, color: 'text-yellow-500', link: codepen },
+    { name: 'bitbucket', icon: IoLogoBitbucket, color: 'text-blue-500', link: bitbucket },
+    { name: 'dribbble', icon: IoLogoDribbble, color: 'text-pink-500', link: dribbble },
+    { name: 'behance', icon: IoLogoBehance, color: 'text-blue-500', link: behance },
+    { name: 'pinterest', icon: IoLogoPinterest, color: 'text-red-500', link: pinterest },
+    { name: 'soundcloud', icon: IoLogoSoundcloud, color: 'text-orange-500', link: soundcloud },
+    { name: 'tumblr', icon: IoLogoTumblr, color: 'text-purple-600', link: tumblr },
+    { name: 'reddit', icon: IoLogoReddit, color: 'text-orange-600', link: reddit },
+    { name: 'vk', icon: IoLogoVk, color: 'text-blue-500', link: vk },
+    { name: 'whatsapp', icon: IoLogoWhatsapp, color: 'text-green-600', link: whatsapp },
+    { name: 'snapchat', icon: IoLogoSnapchat, color: 'text-yellow-400', link: snapchat },
+    { name: 'vimeo', icon: IoLogoVimeo, color: 'text-green-500', link: vimeo },
+    { name: 'tiktok', icon: IoLogoTiktok, color: 'text-black', link: tiktok },
+    { name: 'foursquare', icon: IoLogoFoursquare, color: 'text-blue-500', link: foursquare },
+    { name: 'skype', icon: IoLogoSkype, color: 'text-blue-600', link: skype },
+    { name: 'website', icon: IoGlobeOutline, color: 'text-gray-500', link: website },
+    { name: 'rss', icon: IoLogoRss, color: 'text-yellow-500', link: rss },
+    { name: 'email', icon: IoMail, color: 'text-gray-600', link: email },
+    { name: 'phone', icon: IoCall, color: 'text-green-500', link: phone },
+    { name: 'address', icon: IoLocation, color: 'text-red-500', link: address },
+  ];
+
   return (
-    <ul className={className}>
-      {facebook && (
-        <li className="inline-block">
-          <a
-            aria-label="facebook"
-            href={facebook}
-            target="_blank"
-            rel="noopener noreferrer nofollow"
-          >
-            <IoLogoFacebook />
-          </a>
-        </li>
-      )}
-      {twitter && (
-        <li className="inline-block">
-          <a
-            aria-label="twitter"
-            href={twitter}
-            target="_blank"
-            rel="noopener noreferrer nofollow"
-          >
-            <IoLogoTwitter />
-          </a>
-        </li>
-      )}
-      {instagram && (
-        <li className="inline-block">
-          <a
-            aria-label="instagram"
-            href={instagram}
-            target="_blank"
-            rel="noopener noreferrer nofollow"
-          >
-            <IoLogoInstagram />
-          </a>
-        </li>
-      )}
-      {youtube && (
-        <li className="inline-block">
-          <a
-            aria-label="youtube"
-            href={youtube}
-            target="_blank"
-            rel="noopener noreferrer nofollow"
-          >
-            <IoLogoYoutube />
-          </a>
-        </li>
-      )}
-      {linkedin && (
-        <li className="inline-block">
-          <a
-            aria-label="linkedin"
-            href={linkedin}
-            target="_blank"
-            rel="noopener noreferrer nofollow"
-          >
-            <IoLogoLinkedin />
-          </a>
-        </li>
-      )}
-      {github && (
-        <li className="inline-block">
-          <a
-            aria-label="github"
-            href={github}
-            target="_blank"
-            rel="noopener noreferrer nofollow"
-          >
-            <IoLogoGithub />
-          </a>
-        </li>
-      )}
-      {gitlab && (
-        <li className="inline-block">
-          <a
-            aria-label="gitlab"
-            href={gitlab}
-            target="_blank"
-            rel="noopener noreferrer nofollow"
-          >
-            <IoLogoGitlab />
-          </a>
-        </li>
-      )}
-      {medium && (
-        <li className="inline-block">
-          <a
-            aria-label="medium"
-            href={medium}
-            target="_blank"
-            rel="noopener noreferrer nofollow"
-          >
-            <IoLogoMedium />
-          </a>
-        </li>
-      )}
-      {codepen && (
-        <li className="inline-block">
-          <a
-            aria-label="codepen"
-            href={codepen}
-            target="_blank"
-            rel="noopener noreferrer nofollow"
-          >
-            <IoLogoCodepen />
-          </a>
-        </li>
-      )}
-      {bitbucket && (
-        <li className="inline-block">
-          <a
-            aria-label="bitbucket"
-            href={bitbucket}
-            target="_blank"
-            rel="noopener noreferrer nofollow"
-          >
-            <IoLogoBitbucket />
-          </a>
-        </li>
-      )}
-      {dribbble && (
-        <li className="inline-block">
-          <a
-            aria-label="dribbble"
-            href={dribbble}
-            target="_blank"
-            rel="noopener noreferrer nofollow"
-          >
-            <IoLogoDribbble />
-          </a>
-        </li>
-      )}
-      {behance && (
-        <li className="inline-block">
-          <a
-            aria-label="behance"
-            href={behance}
-            target="_blank"
-            rel="noopener noreferrer nofollow"
-          >
-            <IoLogoBehance />
-          </a>
-        </li>
-      )}
-      {pinterest && (
-        <li className="inline-block">
-          <a
-            aria-label="pinterest"
-            href={pinterest}
-            target="_blank"
-            rel="noopener noreferrer nofollow"
-          >
-            <IoLogoPinterest />
-          </a>
-        </li>
-      )}
-      {soundcloud && (
-        <li className="inline-block">
-          <a
-            aria-label="soundcloud"
-            href={soundcloud}
-            target="_blank"
-            rel="noopener noreferrer nofollow"
-          >
-            <IoLogoSoundcloud />
-          </a>
-        </li>
-      )}
-      {tumblr && (
-        <li className="inline-block">
-          <a
-            aria-label="tumblr"
-            href={tumblr}
-            target="_blank"
-            rel="noopener noreferrer nofollow"
-          >
-            <IoLogoTumblr />
-          </a>
-        </li>
-      )}
-      {reddit && (
-        <li className="inline-block">
-          <a
-            aria-label="reddit"
-            href={reddit}
-            target="_blank"
-            rel="noopener noreferrer nofollow"
-          >
-            <IoLogoReddit />
-          </a>
-        </li>
-      )}
-      {vk && (
-        <li className="inline-block">
-          <a
-            aria-label="vk"
-            href={vk}
-            target="_blank"
-            rel="noopener noreferrer nofollow"
-          >
-            <IoLogoVk />
-          </a>
-        </li>
-      )}
-      {whatsapp && (
-        <li className="inline-block">
-          <a
-            aria-label="whatsapp"
-            href={whatsapp}
-            target="_blank"
-            rel="noopener noreferrer nofollow"
-          >
-            <IoLogoWhatsapp />
-          </a>
-        </li>
-      )}
-      {snapchat && (
-        <li className="inline-block">
-          <a
-            aria-label="snapchat"
-            href={snapchat}
-            target="_blank"
-            rel="noopener noreferrer nofollow"
-          >
-            <IoLogoSnapchat />
-          </a>
-        </li>
-      )}
-      {vimeo && (
-        <li className="inline-block">
-          <a
-            aria-label="vimeo"
-            href={vimeo}
-            target="_blank"
-            rel="noopener noreferrer nofollow"
-          >
-            <IoLogoVimeo />
-          </a>
-        </li>
-      )}
-      {tiktok && (
-        <li className="inline-block">
-          <a
-            aria-label="tiktok"
-            href={tiktok}
-            target="_blank"
-            rel="noopener noreferrer nofollow"
-          >
-            <IoLogoTiktok />
-          </a>
-        </li>
-      )}
-      {foursquare && (
-        <li className="inline-block">
-          <a
-            aria-label="foursquare"
-            href={foursquare}
-            target="_blank"
-            rel="noopener noreferrer nofollow"
-          >
-            <IoLogoFoursquare />
-          </a>
-        </li>
-      )}
-      {skype && (
-        <li className="inline-block">
-          <a
-            aria-label="skype"
-            href={skype}
-            target="_blank"
-            rel="noopener noreferrer nofollow"
-          >
-            <IoLogoSkype />
-          </a>
-        </li>
-      )}
-      {website && (
-        <li className="inline-block">
-          <a
-            aria-label="website"
-            href={website}
-            target="_blank"
-            rel="noopener noreferrer nofollow"
-          >
-            <IoGlobeOutline />
-          </a>
-        </li>
-      )}
-      {rss && (
-        <li className="inline-block">
-          <a
-            aria-label="rss feed"
-            href={rss}
-            target="_blank"
-            rel="noopener noreferrer nofollow"
-          >
-            <IoLogoRss />
-          </a>
-        </li>
-      )}
-      {email && (
-        <li className="inline-block">
-          <a aria-label="email" href={`mailto:${email}`}>
-            <IoMail />
-          </a>
-        </li>
-      )}
-      {phone && (
-        <li className="inline-block">
-          <a aria-label="telephone" href={`tel:${phone}`}>
-            <IoCall />
-          </a>
-        </li>
-      )}
-      {address && (
-        <li className="inline-block">
-          <a
-            aria-label="location"
-            href={address}
-            target="_blank"
-            rel="noopener noreferrer nofollow"
-          >
-            <IoLocation />
-          </a>
-        </li>
-      )}
+    <ul className={`${className} flex flex-wrap space-x-4`}>
+      {socialIcons.map(({ name, icon: Icon, color, link }, i) => (
+        link ? (
+          <li key={i} className="inline-block">
+            <a
+              aria-label={name}
+              href={link}
+              target="_blank"
+              rel="noopener noreferrer nofollow"
+              className={`p-3 rounded-full text-xl ${color} hover:text-white hover:bg-gray-700 transition-colors`}
+            >
+              <Icon />
+            </a>
+          </li>
+        ) : null
+      ))}
     </ul>
   );
 };
