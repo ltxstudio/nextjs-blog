@@ -6,12 +6,33 @@ import SimilarPosts from "@partials/SimilarPosts";
 import Image from "next/image";
 import Link from "next/link";
 import MDXContent from "./partials/MDXContent";
+import { DiscussionEmbed } from "disqus-react"; // Import Disqus component
+import { useEffect, useState } from "react";
 
 const PostSingle = ({ post, posts, authors, slug }) => {
   const { frontmatter, content } = post;
   let { description, title, date, image, categories, tags } = frontmatter;
   description = description ? description : content.slice(0, 120);
   const similarPosts = similerItems(post, posts, slug);
+  
+  // Disqus configuration
+  const disqusShortname = "nullbite"; // Replace with your Disqus shortname
+  const disqusConfig = {
+    url: `https://yourwebsite.com/${slug}`, // Replace with your website URL
+    identifier: slug, // Replace with the post identifier
+    title: title, // Replace with the post title
+  };
+
+  // State for loading comments
+  const [loadingComments, setLoadingComments] = useState(true);
+
+  useEffect(() => {
+    // Simulate loading comments
+    const timer = setTimeout(() => {
+      setLoadingComments(false);
+    }, 1000); // Simulate a delay for loading
+    return () => clearTimeout(timer);
+  }, []);
 
   return (
     <>
@@ -90,7 +111,7 @@ const PostSingle = ({ post, posts, authors, slug }) => {
               <Share
                 className="social-share mb-4"
                 title={title}
-                description={description}
+ description={description}
                 slug={slug}
               />
             </div>
@@ -105,6 +126,16 @@ const PostSingle = ({ post, posts, authors, slug }) => {
           </div>
         </section>
       )}
+      <section className="section">
+        <div className="container">
+          <h2 className="mb-8 text-center">Comments</h2>
+          {loadingComments ? (
+            <div className="text-center">Loading comments...</div>
+          ) : (
+            <DiscussionEmbed shortname={disqusShortname} config={disqusConfig} />
+          )}
+        </div>
+      </section>
     </>
   );
 };
