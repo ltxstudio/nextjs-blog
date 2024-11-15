@@ -6,6 +6,7 @@ import SimilarPosts from "@partials/SimilarPosts";
 import Image from "next/image";
 import Link from "next/link";
 import MDXContent from "./partials/MDXContent";
+import { useEffect } from "react";
 
 const PostSingle = ({ post, posts, authors, slug }) => {
   const { frontmatter, content } = post;
@@ -13,10 +14,19 @@ const PostSingle = ({ post, posts, authors, slug }) => {
   description = description ? description : content.slice(0, 120);
   const similarPosts = similerItems(post, posts, slug);
 
+  useEffect(() => {
+    // Load Disqus comments
+    const d = document.createElement("script");
+    d.src = `https://YOUR_DISQUS_SHORTNAME.disqus.com/embed.js`;
+    d.setAttribute("data-timestamp", +new Date());
+    d.async = true;
+    document.body.appendChild(d);
+  }, []);
+
   return (
     <>
-      <section className="section">
-        <div className="container">
+      <section className="section py-8">
+        <div className="container mx-auto px-4">
           <article className="text-center">
             {markdownify(title, "h1", "h2")}
             <ul className="mb-8 mt-4 flex flex-wrap items-center justify-center space-x-3 text-text">
@@ -31,7 +41,7 @@ const PostSingle = ({ post, posts, authors, slug }) => {
                     <Link
                       href={`/authors/${slugify(author.frontmatter.title)}`}
                       key={`author-${i}`}
-                      className="flex items-center hover:text-primary"
+                      className="flex items-center hover:text-primary transition duration-300"
                     >
                       {author.frontmatter.image && (
                         <Image
@@ -46,14 +56,14 @@ const PostSingle = ({ post, posts, authors, slug }) => {
                     </Link>
                   ))}
               </li>
-              <li>{dateFormat(date)}</li>
+              <li className="text-gray-600">{dateFormat(date)}</li>
               <li>
-                <ul>
+                <ul className="flex flex-wrap">
                   {categories.map((category, i) => (
                     <li className="inline-block" key={`category-${i}`}>
                       <Link
                         href={`/categories/${slugify(category)}`}
-                        className="mr-3 hover:text-primary"
+                        className="mr-3 hover:text-primary transition duration-300"
                       >
                         &#9635; {humanize(category)}
                       </Link>
@@ -68,19 +78,19 @@ const PostSingle = ({ post, posts, authors, slug }) => {
                 height={500}
                 width={1000}
                 alt={title}
-                className="rounded-lg"
+                className="rounded-lg shadow-lg mb-8"
               />
             )}
             <div className="content mb-16 text-left">
               <MDXContent content={content} />
             </div>
-            <div className="flex flex-wrap items-center justify-between">
-              <ul className="mb-4 mr-4 space-x-3">
+            <div className="flex flex-wrap items-center justify-between mb-8">
+              <ul className="mb-4 mr-4 flex flex-wrap space-x-3">
                 {tags.map((tag, i) => (
                   <li className="inline-block" key={`tag-${i}`}>
                     <Link
                       href={`/tags/${slugify(tag)}`}
-                      className="block rounded-lg bg-theme-light px-4 py-2 font-semibold text-dark hover:text-primary"
+                      className="block rounded-lg bg-theme-light px-4 py-2 font-semibold text-dark hover:bg-primary hover:text-white transition duration-300"
                     >
                       #{humanize(tag)}
                     </Link>
@@ -89,7 +99,7 @@ const PostSingle = ({ post, posts, authors, slug }) => {
               </ul>
               <Share
                 className="social-share mb-4"
-                title={title}
+                title={ title}
                 description={description}
                 slug={slug}
               />
@@ -100,11 +110,18 @@ const PostSingle = ({ post, posts, authors, slug }) => {
       {similarPosts && similarPosts.length > 0 && (
         <section className="section">
           <div className="container">
-            <h2 className="mb-8 text-center">Similar Posts</h2>
+            <h2 className="mb-8 text-center text-2xl font-bold">Similar Posts</h2>
             <SimilarPosts posts={similarPosts.slice(0, 3)} />
           </div>
         </section>
       )}
+      <section className="section">
+        <div className="container">
+          <h2 className="mb-4 text-center text-xl font-bold">Comments</h2>
+          <div id="disqus_thread"></div>
+          <noscript>Please enable JavaScript to view the comments powered by Disqus.</noscript>
+        </div>
+      </section>
     </>
   );
 };
