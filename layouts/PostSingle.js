@@ -6,7 +6,6 @@ import SimilarPosts from "@partials/SimilarPosts";
 import Image from "next/image";
 import Link from "next/link";
 import MDXContent from "./partials/MDXContent";
-import { useEffect } from "react";
 
 const PostSingle = ({ post, posts, authors, slug }) => {
   const { frontmatter, content } = post;
@@ -14,19 +13,10 @@ const PostSingle = ({ post, posts, authors, slug }) => {
   description = description ? description : content.slice(0, 120);
   const similarPosts = similerItems(post, posts, slug);
 
-  useEffect(() => {
-    // Load Disqus comments
-    const d = document.createElement("script");
-    d.src = `https://YOUR_DISQUS_SHORTNAME.disqus.com/embed.js`;
-    d.setAttribute("data-timestamp", +new Date());
-    d.async = true;
-    document.body.appendChild(d);
-  }, []);
-
   return (
     <>
-      <section className="section py-8">
-        <div className="container mx-auto px-4">
+      <section className="section">
+        <div className="container">
           <article className="text-center">
             {markdownify(title, "h1", "h2")}
             <ul className="mb-8 mt-4 flex flex-wrap items-center justify-center space-x-3 text-text">
@@ -84,7 +74,7 @@ const PostSingle = ({ post, posts, authors, slug }) => {
             <div className="content mb-16 text-left">
               <MDXContent content={content} />
             </div>
-            <div className="flex flex-wrap items-center justify-between mb-8">
+            <div className="flex flex-wrap items-center justify-between">
               <ul className="mb-4 mr-4 flex flex-wrap space-x-3">
                 {tags.map((tag, i) => (
                   <li className="inline-block" key={`tag-${i}`}>
@@ -99,7 +89,7 @@ const PostSingle = ({ post, posts, authors, slug }) => {
               </ul>
               <Share
                 className="social-share mb-4"
-                title={ title}
+                title={title}
                 description={description}
                 slug={slug}
               />
@@ -115,13 +105,6 @@ const PostSingle = ({ post, posts, authors, slug }) => {
           </div>
         </section>
       )}
-      <section className="section">
-        <div className="container">
-          <h2 className="mb-4 text-center text-xl font-bold">Comments</h2>
-          <div id="disqus_thread"></div>
-          <noscript>Please enable JavaScript to view the comments powered by Disqus.</noscript>
-        </div>
-      </section>
     </>
   );
 };
