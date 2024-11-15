@@ -6,6 +6,7 @@ import SimilarPosts from "@partials/SimilarPosts";
 import Image from "next/image";
 import Link from "next/link";
 import MDXContent from "./partials/MDXContent";
+import { DiscussionEmbed } from "disqus-react"; // Import DisqusEmbed
 
 const PostSingle = ({ post, posts, authors, slug }) => {
   const { frontmatter, content } = post;
@@ -13,10 +14,18 @@ const PostSingle = ({ post, posts, authors, slug }) => {
   description = description ? description : content.slice(0, 120);
   const similarPosts = similerItems(post, posts, slug);
 
+  // Disqus configuration
+  const disqusShortname = "nullbite"; // Replace with your Disqus shortname
+  const disqusConfig = {
+    url: `${config.site.base_url}/${slug}`,
+    identifier: slug, // Replace with your unique identifier
+    title: title,
+  };
+
   return (
     <>
-      <section className="section">
-        <div className="container">
+      <section className="section py-8">
+        <div className="container mx-auto px-4">
           <article className="text-center">
             {markdownify(title, "h1", "h2")}
             <ul className="mb-8 mt-4 flex flex-wrap items-center justify-center space-x-3 text-text">
@@ -74,7 +83,7 @@ const PostSingle = ({ post, posts, authors, slug }) => {
             <div className="content mb-16 text-left">
               <MDXContent content={content} />
             </div>
-            <div className="flex flex-wrap items-center justify-between">
+            <div className="flex flex-wrap items-center justify-between mb-8">
               <ul className="mb-4 mr-4 flex flex-wrap space-x-3">
                 {tags.map((tag, i) => (
                   <li className="inline-block" key={`tag-${i}`}>
@@ -105,6 +114,15 @@ const PostSingle = ({ post, posts, authors, slug }) => {
           </div>
         </section>
       )}
+      <section className="section py-8">
+        <div className="container mx-auto px-4">
+          <h2 className="mb-4 text-center text-xl font-bold">Comments</h2>
+          <DiscussionEmbed
+            shortname={disqusShortname}
+            config={disqusConfig}
+          />
+        </div>
+      </section>
     </>
   );
 };
