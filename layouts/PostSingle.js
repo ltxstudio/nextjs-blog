@@ -7,11 +7,23 @@ import Image from "next/image";
 import Link from "next/link";
 import MDXContent from "./partials/MDXContent";
 
+// Import the Disqus component
+import { DiscussionEmbed } from "disqus-react";
+
 const PostSingle = ({ post, posts, authors, slug }) => {
   const { frontmatter, content } = post;
   let { description, title, date, image, categories, tags } = frontmatter;
   description = description ? description : content.slice(0, 120);
   const similarPosts = similerItems(post, posts, slug);
+
+  // Disqus configuration
+  const disqusConfig = {
+    shortname: "your-disqus-shortname", // Replace with your Disqus shortname
+    config: {
+      identifier: slug,  // Unique identifier for the post (slug)
+      title: title,      // Title of the post
+    },
+  };
 
   return (
     <>
@@ -97,10 +109,26 @@ const PostSingle = ({ post, posts, authors, slug }) => {
           </article>
         </div>
       </section>
+
+      {/* Disqus Comments Section */}
+      <section className="section py-12 bg-white">
+        <div className="container mx-auto px-4">
+          <h2 className="text-center text-xl font-bold text-gray-800 mb-6">
+            Comments
+          </h2>
+          <div className="disqus-comments">
+            {/* Embed Disqus comments */}
+            <DiscussionEmbed {...disqusConfig} />
+          </div>
+        </div>
+      </section>
+
       {similarPosts && similarPosts.length > 0 && (
         <section className="section py-12 bg-gray-100">
           <div className="container mx-auto px-4">
-            <h2 className="mb-8 text-center text-2xl font-bold text-gray-800">Similar Posts</h2>
+            <h2 className="mb-8 text-center text-2xl font-bold text-gray-800">
+              Similar Posts
+            </h2>
             <SimilarPosts posts={similarPosts.slice(0, 3)} />
           </div>
         </section>
